@@ -1,159 +1,91 @@
 
-import { motion, useReducedMotion } from "motion/react";
-import {
-  ArrowUpRight,
-  ShoppingCart,
-  BarChart3,
-  Building2,
-  ArrowRight,
-  type LucideIcon,
-} from "lucide-react";
 import { Link } from "react-router-dom";
-
-type Project = {
-  id: number;
-  title: string;
-  category: string;
-  description: string;
-  technologies: string[];
-  gradient: string;
-  icon: LucideIcon;
-  label: string;
-};
-
-const projects: Project[] = [
-  {
-    id: 1,
-    title: "Modern E-Commerce Store",
-    category: "E-Commerce Website",
-    description:
-      "A modern online storefront concept with product discovery and shopping features.",
-    technologies: ["React", "TypeScript", "Tailwind"],
-    gradient: "from-violet-600 via-purple-700 to-indigo-900",
-    icon: ShoppingCart,
-    label: "E-COMMERCE",
-  },
-  {
-    id: 2,
-    title: "Business Analytics Dashboard",
-    category: "Web Application",
-    description:
-      "A business dashboard concept for visualizing sales, customers, and key metrics.",
-    technologies: ["React", "Dashboard", "Charts"],
-    gradient: "from-blue-600 via-indigo-700 to-slate-900",
-    icon: BarChart3,
-    label: "DASHBOARD",
-  },
-  {
-    id: 3,
-    title: "Real Estate Business Website",
-    category: "Business Website",
-    description:
-      "A modern real estate concept for showcasing properties and capturing enquiries.",
-    technologies: ["React", "Tailwind", "Responsive"],
-    gradient: "from-fuchsia-600 via-violet-700 to-purple-900",
-    icon: Building2,
-    label: "REAL ESTATE",
-  },
-];
+import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { motion } from "motion/react";
+import { projects } from "../../data/projects";
 
 export default function PortfolioPreview() {
-  const reduceMotion = useReducedMotion();
+  const featuredProjects = projects.slice(0, 3);
 
   return (
-    <section
-      id="portfolio-preview"
-      className="bg-slate-50 px-6 py-24 md:py-28"
-    >
+    <section className="bg-slate-50 px-6 py-24">
       <div className="mx-auto max-w-7xl">
+
         {/* Section Heading */}
-        <div className="mb-14 flex flex-col justify-between gap-6 md:flex-row md:items-end">
-          <div className="max-w-2xl">
-            <p className="font-semibold uppercase tracking-widest text-primary">
-              Selected Portfolio Concepts
+        <div className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <div>
+            <p className="mb-3 text-sm font-bold uppercase tracking-widest text-violet-600">
+              Our Portfolio
             </p>
 
-            <h2 className="mt-4 text-3xl font-extrabold text-slate-900 sm:text-4xl lg:text-5xl">
-              Explore Our
-              <span className="text-primary"> Creative Work.</span>
+            <h2 className="text-3xl font-extrabold text-slate-900 md:text-5xl">
+              Featured Projects
             </h2>
 
-            <p className="mt-5 text-lg leading-8 text-slate-600">
-              Explore example website concepts showcasing
-              modern design and development capabilities.
+            <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-600">
+              Explore our website and web application design
+              concepts demonstrating modern development capabilities.
             </p>
           </div>
 
           <Link
             to="/portfolio"
-            className="inline-flex items-center gap-2 font-semibold text-primary hover:text-violet-800"
+            className="inline-flex items-center gap-2 font-semibold text-violet-600 hover:text-violet-800"
           >
             View All Projects
-            <ArrowRight size={19} aria-hidden="true" />
+            <ArrowRight size={20} />
           </Link>
         </div>
 
-        {/* Project Grid */}
+        {/* Portfolio Cards */}
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project, index) => {
-            const Icon = project.icon;
+          {featuredProjects.map((project, index) => {
+            const cover = project.screenshots?.[0];
 
             return (
               <motion.article
                 key={project.id}
-                initial={
-                  reduceMotion ? false : { opacity: 0, y: 30 }
-                }
+                initial={{ opacity: 0, y: 25 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.15 }}
+                viewport={{ once: true }}
                 transition={{
-                  duration: 0.5,
-                  delay: reduceMotion ? 0 : index * 0.1,
+                  duration: 0.45,
+                  delay: index * 0.12,
                 }}
-                className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-shadow duration-300 hover:shadow-xl"
+                className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
               >
-                {/* Project Illustration */}
-                <div
-                 className={`relative flex h-60 items-center justify-center overflow-hidden bg-linear-to-br ${project.gradient} p-6`}
-                >
-                  <div
-                    aria-hidden="true"
-                    className="absolute -right-12 -top-12 h-40 w-40 rounded-full bg-white/10 blur-2xl"
-                  />
-
-                  {/* Mock Browser Window */}
-                  <div className="relative w-full max-w-xs rounded-xl border border-white/30 bg-white/15 p-4 shadow-2xl backdrop-blur-sm transition-transform duration-300 group-hover:scale-105">
-                    <div className="mb-6 flex gap-1.5">
-                      <span className="h-2.5 w-2.5 rounded-full bg-red-300" />
-                      <span className="h-2.5 w-2.5 rounded-full bg-yellow-300" />
-                      <span className="h-2.5 w-2.5 rounded-full bg-green-300" />
-                    </div>
-
-                    <Icon
-                      size={42}
-                      className="mx-auto mb-4 text-white"
-                      aria-hidden="true"
+                {/* Project Image */}
+                <div className="relative h-64 overflow-hidden bg-slate-100">
+                  {cover ? (
+                    <img
+                      src={cover}
+                      alt={`${project.title} concept design`}
+                      loading="lazy"
+                      className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                     />
-
-                    <p className="text-center text-xl font-bold tracking-wide text-white">
-                      {project.label}
-                    </p>
-
-                    <div className="mt-6 space-y-2">
-                      <div className="h-2 rounded-full bg-white/40" />
-                      <div className="h-2 w-4/5 rounded-full bg-white/30" />
-                      <div className="h-2 w-3/5 rounded-full bg-white/20" />
+                  ) : (
+                    <div
+                      className={`flex h-full items-center justify-center bg-linear-to-br ${project.gradient}`}
+                    >
+                      <span className="text-2xl font-bold text-white">
+                        {project.label}
+                      </span>
                     </div>
-                  </div>
+                  )}
 
-                  <span className="absolute left-5 top-5 rounded-full border border-white/30 bg-white/20 px-3 py-1 text-xs font-semibold text-white backdrop-blur-md">
-                    Demo Concept
-                  </span>
+                  {/* View Project Button */}
+                  <Link
+                    to={`/portfolio/${project.slug}`}
+                    className="absolute left-5 top-5 z-10 inline-flex items-center gap-2 rounded-full bg-violet-600 px-5 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-violet-700"
+                  >
+                    View Project
+                    <ArrowUpRight size={18} />
+                  </Link>
                 </div>
 
                 {/* Project Details */}
                 <div className="p-7">
-                  <p className="text-sm font-semibold text-primary">
+                  <p className="text-sm font-semibold text-violet-600">
                     {project.category}
                   </p>
 
@@ -161,33 +93,29 @@ export default function PortfolioPreview() {
                     {project.title}
                   </h3>
 
-                  <p className="mt-4 leading-7 text-slate-600">
+                  <p className="mt-4 min-h-20 leading-7 text-slate-600">
                     {project.description}
                   </p>
 
-                  {/* Technology Badges */}
-                  <div className="mt-6 flex flex-wrap gap-2">
-                    {project.technologies.map((tech) => (
+                  {/* Technology Tags */}
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {project.technologies.map((technology) => (
                       <span
-                        key={tech}
-                        className="rounded-lg bg-violet-50 px-3 py-1.5 text-xs font-semibold text-violet-700"
+                        key={technology}
+                        className="rounded-lg bg-violet-50 px-3 py-2 text-xs font-semibold text-violet-700"
                       >
-                        {tech}
+                        {technology}
                       </span>
                     ))}
                   </div>
 
-                  {/* Link */}
+                  {/* Explore Project Link */}
                   <Link
-                    to="/portfolio"
-                    className="mt-7 inline-flex items-center gap-2 font-semibold text-slate-900 hover:text-primary"
-                    aria-label={`Explore portfolio information about ${project.title}`}
+                    to={`/portfolio/${project.slug}`}
+                    className="mt-7 inline-flex items-center gap-2 font-semibold text-slate-900 hover:text-violet-600"
                   >
-                    Explore Project Concepts
-                    <ArrowUpRight
-                      size={18}
-                      aria-hidden="true"
-                    />
+                    Explore Project
+                    <ArrowUpRight size={18} />
                   </Link>
                 </div>
               </motion.article>

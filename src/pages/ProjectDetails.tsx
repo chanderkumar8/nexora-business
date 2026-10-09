@@ -15,6 +15,7 @@ export default function ProjectDetails() {
           to="/portfolio"
           className="mt-6 inline-flex text-primary"
         >
+          const cover = project.screenshots?.[0];
           Return to Portfolio
         </Link>
       </main>

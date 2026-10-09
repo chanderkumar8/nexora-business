@@ -143,9 +143,7 @@ export default function Footer() {
             © {year} Nexora Digital. All rights reserved.
           </p>
 
-          <p className="text-sm text-slate-400">
-            Designed & Developed with React and Tailwind CSS
-          </p>
+          
         </div>
       </div>
     </footer>

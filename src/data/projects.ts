@@ -4,6 +4,11 @@ export type ProjectCategory =
   | "Web Application"
   | "Business Website";
 
+export type ProjectStatus =
+  | "concept"
+  | "in-progress"
+  | "completed";
+
 export type Project = {
   id: number;
   slug: string;
@@ -15,6 +20,16 @@ export type Project = {
   technologies: string[];
   gradient: string;
   label: string;
+
+  // Project images
+  screenshots: string[];
+
+  // Project information
+  status: ProjectStatus;
+  challenge?: string;
+  solution?: string;
+  liveUrl?: string;
+  githubUrl?: string;
 };
 
 export const projects: Project[] = [
@@ -23,56 +38,127 @@ export const projects: Project[] = [
     slug: "ecommerce-store",
     title: "Modern E-Commerce Store",
     category: "E-Commerce",
+
     description:
-      "A responsive online shopping experience with a modern storefront design.",
+      "A modern and responsive e-commerce website concept with a clean shopping experience.",
+
     overview:
-      "A demonstration concept for a retail storefront featuring product discovery and a streamlined shopping experience.",
+      "A professional e-commerce website design concept featuring product listings, shopping categories, and a responsive storefront interface.",
+
     features: [
-      "Responsive storefront design",
-      "Product catalog concept",
+      "Responsive website design",
+      "Product catalog interface",
       "Shopping cart UI concept",
-      "Mobile-friendly layouts",
+      "Product categories",
+      "Modern homepage layout",
+      "Mobile-friendly design",
     ],
-    technologies: ["React", "TypeScript", "Tailwind CSS"],
+
+    technologies: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+    ],
+
     gradient: "from-violet-600 to-indigo-900",
     label: "E-COMMERCE",
+
+    screenshots: [
+      "/images/projects/ecommerce/homepage.png",
+    ],
+
+    status: "concept",
+
+    challenge:
+      "Design an attractive online shopping interface that makes products easy to discover.",
+
+    solution:
+      "Create a modern storefront concept with structured product sections and responsive layouts.",
   },
+
   {
     id: 2,
     slug: "business-dashboard",
     title: "Business Analytics Dashboard",
     category: "Web Application",
+
     description:
-      "A modern dashboard concept for business analytics and management.",
+      "A professional business dashboard concept featuring analytics, charts, and management tools.",
+
     overview:
-      "A dashboard design demonstration showing how business metrics, sales information, and management tools can be organized.",
+      "A web application dashboard design concept for displaying business performance, revenue charts, and operational information in a clear interface.",
+
     features: [
-      "Analytics dashboard concept",
-      "Revenue cards and charts",
-      "Responsive dashboard layout",
-      "Management interface design",
+      "Modern dashboard interface",
+      "Analytics chart concepts",
+      "Revenue overview design",
+      "Business statistics cards",
+      "Responsive navigation layout",
+      "Data visualization UI",
     ],
-    technologies: ["React", "TypeScript", "Tailwind CSS"],
+
+    technologies: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+    ],
+
     gradient: "from-blue-600 to-slate-900",
     label: "DASHBOARD",
+
+    screenshots: [
+      "/images/projects/dashboard/homepage.png",
+    ],
+
+    status: "concept",
+
+    challenge:
+      "Present business information in a way that is easy to understand and navigate.",
+
+    solution:
+      "Design a dashboard interface with organized information cards, charts, and navigation.",
   },
+
   {
     id: 3,
     slug: "real-estate-website",
     title: "Real Estate Business Website",
     category: "Business Website",
+
     description:
-      "A professional real estate website concept for property discovery.",
+      "A premium real estate website concept featuring properties, modern layouts, and elegant design.",
+
     overview:
-      "A responsive real estate website demonstration highlighting property listings, modern presentation, and enquiry-focused page design.",
+      "A real estate website design concept focused on presenting property listings, featured homes, and property information through a professional interface.",
+
     features: [
-      "Property listing UI concept",
-      "Property search design",
-      "Responsive layouts",
-      "Enquiry form concept",
+      "Modern real estate homepage",
+      "Property listing card designs",
+      "Featured properties section",
+      "Property search UI concept",
+      "Responsive website layout",
+      "Contact enquiry interface concept",
     ],
-    technologies: ["React", "TypeScript", "Tailwind CSS"],
+
+    technologies: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+    ],
+
     gradient: "from-fuchsia-600 to-purple-900",
     label: "REAL ESTATE",
+
+    screenshots: [
+      "/images/projects/real-estate/homepage.png",
+    ],
+
+    status: "concept",
+
+    challenge:
+      "Create a visually engaging website design for showcasing residential properties.",
+
+    solution:
+      "Design an elegant property browsing experience with attractive listing cards and clear enquiry options.",
   },
 ];
